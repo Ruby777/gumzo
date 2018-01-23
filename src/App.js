@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList.js';
+import MessageList from './components/MessageList.js';
 
 
 // Initialize Firebase
@@ -29,6 +30,7 @@ class App extends Component {
         </p>
          <div className="roomslist">
                 <RoomList />
+                <MessageList />
          </div>
       </div>
     );
