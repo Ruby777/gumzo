@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
         rooms: [],
-        newRoomName:' ',
+        newRoomName:'',
         submit:
-    }
+      };
 
    this.roomsRef = this.props.firebase.database().ref('rooms');
-}
+ };
 
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
@@ -32,31 +33,33 @@ class RoomList extends Component {
        });
 
      }
-}
+ }
 
-    render(){
-      const room = this.state.rooms.map(room);
-          return(
-          <div>
-            <li>
-                 {room}
-            </li>
-            <form name="formname">
-                <input type="text"
-                name="fname"
-                placeholder="New Room Name"
-                onChange={this.state.newRoomName}
-                handleNewRoomName={(e) => this.handleNewRoomName(e)}>
-                <br />
-                <button onClick={this.createRoom}>Create Room</button>
+  render(){
 
-             </form>
-          </div>
+      const template = this.state.rooms.map((room, i) => {
 
+        return(
+           <li key={room.key}>{room.name}</li>
+           )
+         });
+
+      return (
+        <ul>
+          {template}
+        </ul>
+        <form name="formname">
+            <input type="text"
+            name="fname"
+            placeholder="New Room Name"
+            onChange={this.state.newRoomName}
+            handleNewRoomName={(e) => this.handleNewRoomName(e)}>
+            <br />
+            <button onClick={this.createRoom}>Create Room</button>
+         </form>
       );
     }
 }
-
 
 
 export default RoomList;
