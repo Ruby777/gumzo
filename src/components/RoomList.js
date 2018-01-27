@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
     this.state = {
         rooms: []
-    }
+    };
 
    this.roomsRef = this.props.firebase.database().ref('rooms');
-}
+ }
 
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
@@ -17,13 +18,21 @@ class RoomList extends Component {
        room.key = snapshot.key;
        this.setState({ rooms: this.state.rooms.concat( room ) })
      });
-}
+  }
 
     render(){
-      const room = this.state.rooms.map(room);
-          return(
-             <li>{this.state.rooms}</li>
 
+      const template = this.state.rooms.map((room, i) => {
+
+        return(
+           <li key={room.key}>{room.name}</li>
+           )
+         });
+
+      return (
+        <ul>
+          {template}
+        </ul>
       );
     }
 }

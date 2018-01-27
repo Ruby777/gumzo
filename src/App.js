@@ -17,20 +17,17 @@ import RoomList from './components/RoomList.js';
   firebase.initializeApp(config);
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
+      <section className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-         <div className="roomslist">
-                <RoomList />
-         </div>
-      </div>
+        <p className="App-title">Bloc Chat</p>
+        <div className="App-roomlist">  
+            <RoomList firebase={firebase} />
+        </div>
+      </section>
     );
   }
 }
