@@ -46,7 +46,7 @@ class RoomList extends Component {
             {template}
          </ul>
 
-         <button>New Room</button>
+         <p className="newRoom">Create A New Room</p>
 
          <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
             <input
@@ -55,10 +55,8 @@ class RoomList extends Component {
                value={this.state.roomName}
                onChange={(e) => this.handleNewRoomName(e)} />
              <br />
-             <button >Create Room</button>
+             <button>Create Room</button>
           </form>
-            // handleNewRoomName={(e)=>this.handleNewRoomName(e)}
-            // createRoom={()=>this.createRoom()}
         </div>
       );
     }

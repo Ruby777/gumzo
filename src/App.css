@@ -1,3 +1,7 @@
+body {
+  background-color: skyblue;
+}
+
 .App {
   width: 300px;
   height: 900px;
@@ -20,12 +24,17 @@
 .App-title {
   font-size: 40px;
   font-weight: bold;
-  color: white;
+  color: black;
 }
 
 .App-roomlist {
   font-size: large;
   color: blue;
+}
+
+.newRoom {
+ color: black;
+ size: 10px;
 }
 
 @keyframes App-logo-spin {
