@@ -5,7 +5,8 @@ class MessageList extends Component {
     super(props);
 
     this.state = {
-       messages:[]
+       messages:[],
+       activeChatRoom:""
     }
 
 
@@ -17,11 +18,11 @@ class MessageList extends Component {
         console.log(snapshot);
         const message = snapshot.val();
         message.key = snapshot.key;
-        this.setState({ messages: this.state.messages.concat( message ) })
+        this.setState({ messages: this.state.messages.concat( message ) });
       });
+    }
 
-
-
+}
 
 
 

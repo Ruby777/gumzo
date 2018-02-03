@@ -19,6 +19,15 @@ import MessageList from './components/MessageList.js';
 
 class App extends Component {
 
+  this.state = {
+     activeChatRoom:{}
+  }
+
+  loadActiveRoom(){
+    this.state.activeChatRoom;
+
+  }
+
   render() {
     return (
       <section className="App">
