@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MessageList from './MessageList.js';
 
 class RoomList extends Component {
   constructor(props) {
@@ -10,10 +11,9 @@ class RoomList extends Component {
       };
 
    this.roomsRef = this.props.firebase.database().ref('rooms');
-}
+ }
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
-       console.log(snapshot);
        const room = snapshot.val();
        room.key = snapshot.key;
        this.setState({ rooms: this.state.rooms.concat( room ) });
@@ -23,44 +23,44 @@ class RoomList extends Component {
      handleNewRoomName(e) {
          let newRoomName = e.target.value;
          this.setState({roomName: newRoomName});
-     }
+        }
 
-      createRoom() {
+    createRoom() {
        this.roomsRef.push({name: this.state.roomName});
         this.setState({roomName: ""});
-      }
+        }
 
 
   render(){
 
-      const template = this.state.rooms.map((room, i) => {
+  const template = this.state.rooms.map((room, i) => {
 
-        return(
-           <li key={room.key}>{room.name}</li>
-           )
-         });
+    return(
+      <li key={room.key}>{room.name}</li>
+      )
+    });
 
-      return (
-       <div>
-         <ul>
-            {template}
-         </ul>
+       return (
+          <div>
+             <ul>
+                {template}
+             </ul>
 
-         <p className="newRoom">Create A New Room</p>
+             <p className="newRoom">Create A New Room</p>
 
-         <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
-            <input
-               type="text"
-               placeholder="New Room Name"
-               value={this.state.roomName}
-               onChange={(e) => this.handleNewRoomName(e)} />
-             <br />
-             <button>Create Room</button>
-          </form>
-        </div>
-      );
+             <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
+                <input
+                   type="text"
+                   placeholder="New Room Name"
+                   value={this.state.roomName}
+                   onChange={(e) => this.handleNewRoomName(e)} />
+                 <br />
+                 <button>Create Room</button>
+              </form>
+          </div>
+        );
     }
-}
+};
 
 
 export default RoomList;
