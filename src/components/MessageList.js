@@ -14,7 +14,7 @@ class MessageList extends Component {
        };
 
     this.messagesRef = this.props.firebase.database().ref('messages');
-    // this.messagesRef = this.messagesRef.orderBy(this.state.roomId).equalTo(this.props.activeRoom);
+    //this.messagesRef = this.messagesRef.orderBy("roomId").equalTo(this.props.activeRoom);
    }
 
     componentDidMount() {
@@ -31,14 +31,17 @@ roomMessages() {
   console.log (messages);
   let activeRoom = this.props.activeRoom;
   let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
-  let mapFilteredMessages = messages.map((message, index) =>
-    <div className="messageListMsg" key={index}>
+  console.log(filteredMessages);
+  let mappingFilteredMessages = filteredMessages.map((message, i) =>
+    <div className="messageListMsg" key={i}>
         <span className="userName">{message.username}</span>
+        <br />
         <span className="sentAt">{message.sentAt}</span>
+        <br />
         <span className="content">{message.content}</span>
     </div>
     );
-  return mapFilteredMessages;
+  return mappingFilteredMessages;
 
 }
 
@@ -48,10 +51,10 @@ roomMessages() {
                 <div className="messagesHeader">
                   <span className="roomName">{this.props.activeRoom}</span>
                 </div>
-                <div className="messageList">{ this.roomMessages() }</div>
+                <div className="messageList">{this.roomMessages()}</div>
              </div>
           );
-      }
+    }
 };
 
 
