@@ -31,7 +31,7 @@ roomMessages() {
   console.log (messages);
   let activeRoom = this.props.activeRoom;
   let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
-  console.log(filteredMessages);
+  console.log (filteredMessages);
   let mappingFilteredMessages = filteredMessages.map((message, i) =>
     <div className="messageListMsg" key={i}>
         <span className="userName">{message.username}</span>
