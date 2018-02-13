@@ -30,7 +30,7 @@ roomMessages() {
   let messages = this.state.messages;
   console.log (messages);
   let activeRoom = this.props.activeRoom;
-  let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
+  // let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
   let mapFilteredMessages = messages.map((message, index) =>
     <div className="messageListMsg" key={index}>
         <span className="userName">{message.username}</span>
