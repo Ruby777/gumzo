@@ -9,7 +9,7 @@ class MessageList extends Component {
           messages:[],
             username: "",
             content: "",
-            sentAt:"",
+            sentAt: "",
             roomId: ""
        };
 
