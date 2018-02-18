@@ -28,16 +28,12 @@ class MessageList extends Component {
 roomMessages() {
 
   let messages = this.state.messages;
-  console.log (messages);
   let activeRoom = this.props.activeRoom;
   let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
-  console.log (filteredMessages);
   let mappingFilteredMessages = filteredMessages.map((message, i) =>
     <div className="messageListMsg" key={i}>
         <span className="userName">{message.username}</span>
-        <br />
         <span className="sentAt">{message.sentAt}</span>
-        <br />
         <span className="content">{message.content}</span>
     </div>
     );

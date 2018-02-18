@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList.js';
@@ -22,14 +21,20 @@ class App extends Component {
     super(props)
 
     this.state = {
-       activeChatRoom:"",
+       // getInitialState(){
+       //   return {
+       //     isSelected: false,
+       //   }
+       // },
+       activeRoom:"",
        activeRoomName:""
     };
   }
 
     setActiveRoom(room) {
-      this.setState({ activeRoom: room.key});
-      this.setState({ activeRoomName: room.name});
+      // this.isSelected = true;
+      this.setState({ activeRoom: room.key });
+      this.setState({ activeRoomName: room.name });
     }
 
 
