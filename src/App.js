@@ -21,18 +21,13 @@ class App extends Component {
     super(props)
 
     this.state = {
-       // getInitialState(){
-       //   return {
-       //     isSelected: false,
-       //   }
-       // },
+   
        activeRoom:"",
        activeRoomName:""
     };
   }
 
     setActiveRoom(room) {
-      // this.isSelected = true;
       this.setState({ activeRoom: room.key });
       this.setState({ activeRoomName: room.name });
     }

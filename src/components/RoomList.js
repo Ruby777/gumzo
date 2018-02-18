@@ -7,7 +7,8 @@ class RoomList extends Component {
 
     this.state = {
         rooms: [],
-        roomName:''
+        roomName:'',
+        messageList:''
       };
 
    this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -15,7 +16,9 @@ class RoomList extends Component {
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
+       console.log(room);
        room.key = snapshot.key;
+       console.log(room.key);
        this.setState({ rooms: this.state.rooms.concat( room ) });
        });
      }
@@ -28,21 +31,36 @@ class RoomList extends Component {
      createRoom() {
         this.roomsRef.push({name: this.state.roomName});
         this.setState({roomName: ""});
-        }
+      }
+     
+     handleClick(e) {
+       console.log("today is Sunday");
+       //finding which room has been selected
+       let newActiveRoom = this.state.rooms.map((room) =>
+       <li key={room.key}>{room.name}</li>
+       );
 
+       console.log(newActiveRoom);
+       let showMessages = this.props.roomMessages;
+       console.log(showMessages);
+      //  this.setState({room: this.props.setActiveRoom});
+      //  this.setState({messageList: this.props.roomMessages});
+     }  
+    
+     
 
   render(){
 
   const template = this.state.rooms.map((room, i) => {
 
     return(
-      <li key={room.key}>{room.name}</li>
+      <li key={room.key} onClick={(e) => this.handleClick(e)} >{room.name}</li>
       )
     });
 
        return (
           <div>
-             <ul onClick={ this.props.roomMessages}>
+             <ul>
                 {template}
              </ul>
 
