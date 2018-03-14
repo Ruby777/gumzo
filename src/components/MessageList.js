@@ -9,7 +9,7 @@ class MessageList extends Component {
           messages:[],
             username: "",
             content: "",
-            sentAt:"",
+            sentAt: "",
             roomId: ""
        };
 
@@ -26,7 +26,7 @@ class MessageList extends Component {
     }
 
 roomMessages() {
-  // We don't have an active room yet, so no messages to display.
+  
   if (!this.props.activeRoom) {
     return;
   }
