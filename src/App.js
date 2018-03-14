@@ -14,27 +14,21 @@ import MessageList from './components/MessageList.js';
     storageBucket: "react-chat-room-5d397.appspot.com",
     messagingSenderId: "797104072210"
   };
+
   firebase.initializeApp(config);
 
 class App extends Component {
   constructor(props){
     super(props)
 
+
     this.state = {
-       // getInitialState(){
-       //   return {
-       //     isSelected: false,
-       //   }
-       // },
-       activeRoom:"",
-       activeRoomName:""
+      activeRoom:null
     };
   }
 
     setActiveRoom(room) {
-      // this.isSelected = true;
-      this.setState({ activeRoom: room.key });
-      this.setState({ activeRoomName: room.name });
+      this.setState({ activeRoom: room });
     }
 
 
@@ -52,7 +46,7 @@ class App extends Component {
         <div className="App-messagelist">
             <MessageList firebase={firebase}
             activeRoom = {this.state.activeRoom}
-            activeRoomName ={this.state.activeRoomName} />
+            setActiveRoom ={(room) => this.setActiveRoom(room)} />
         </div>
       </section>
     );

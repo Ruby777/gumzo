@@ -26,34 +26,44 @@ class MessageList extends Component {
     }
 
 roomMessages() {
+  // We don't have an active room yet, so no messages to display.
+  if (!this.props.activeRoom) {
+    return;
+  }
 
   let messages = this.state.messages;
   let activeRoom = this.props.activeRoom;
-  let filteredMessages = messages.filter( message => (message.roomId === this.props.activeRoom));
-  let mappingFilteredMessages = filteredMessages.map((message, i) =>
-    <div className="messageListMsg" key={i}>
-        <span className="userName">{message.username}</span>
-        <span className="sentAt">{message.sentAt}</span>
-        <span className="content">{message.content}</span>
-    </div>
-    );
-  return mappingFilteredMessages;
+  let filteredMessages = messages.filter( message => {
+    return message.roomId === activeRoom.key;
+  });
 
+  let mappingFilteredMessages = filteredMessages.map((message, i) => {
+    return (
+      <div className="messageListMsg" key={i}>
+          <span className="userName">Username: {message.username}</span>
+          <br />
+          <span className="sentAt">Sent At: {message.sentAt}</span>
+          <br />
+          <span className="content">Content: {message.content}</span>
+      </div>
+    );
+  });
+
+  return mappingFilteredMessages; 
 }
+
 
     render(){
           return(
              <div className="messageContainer">
                 <div className="messagesHeader">
-                  <span className="roomName">{this.props.activeRoom}</span>
+                  <span className="roomName">Active Room: {this.props.activeRoom ? this.props.activeRoom.name : ''}</span>
                 </div>
-                <div className="messageList">{this.roomMessages()}</div>
+                <div className="messageList" >{this.roomMessages()}</div>
              </div>
           );
     }
 };
-
-
 
 
 

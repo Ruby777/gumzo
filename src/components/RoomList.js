@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MessageList from './MessageList.js';
 
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class RoomList extends Component {
 
    this.roomsRef = this.props.firebase.database().ref('rooms');
   }
+
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
@@ -28,7 +30,7 @@ class RoomList extends Component {
      createRoom() {
         this.roomsRef.push({name: this.state.roomName});
         this.setState({roomName: ""});
-        }
+     }
 
 
   render(){
@@ -36,13 +38,15 @@ class RoomList extends Component {
   const template = this.state.rooms.map((room, i) => {
 
     return(
-      <li key={room.key}>{room.name}</li>
+      <li key={room.key} onClick = {() => {this.props.setActiveRoom(room);}}>{room.name}</li>
       )
     });
 
+    
+
        return (
           <div>
-             <ul onClick={ this.props.roomMessages}>
+             <ul>
                 {template}
              </ul>
 
