@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MessageList from './MessageList.js';
+
 
 
 class RoomList extends Component {
@@ -41,7 +41,7 @@ class RoomList extends Component {
   const template = this.state.rooms.map((room, i) => {
 
     return(
-      <li key={room.key} onClick = {() => {this.props.setActiveRoom(room);}}>{room.name}</li>
+      <li key={room.key} onClick = {() => {this.props.setActiveRoom(room)}}>{room.name}</li>
       )
     });
 
