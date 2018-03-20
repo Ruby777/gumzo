@@ -17,7 +17,7 @@ class MessageList extends Component {
     //this.messagesRef = this.messagesRef.orderBy("roomId").equalTo(this.props.activeRoom);
    }
 
-    componentDidMount() {
+   componentDidMount() {
       this.messagesRef.on('child_added', snapshot => {
         const message = snapshot.val();
         message.key = snapshot.key;
@@ -52,6 +52,15 @@ roomMessages() {
   return mappingFilteredMessages; 
 }
 
+handleNewMessage(e) {
+  let newText = e.target.value;
+  this.setState({content: newText});
+ }
+
+newMessage() {
+  this.messagesRef.push({content: this.state.content});
+  this.setState({content: ""});
+}
 
     render(){
           return(
@@ -60,6 +69,15 @@ roomMessages() {
                   <span className="roomName">Active Room: {this.props.activeRoom ? this.props.activeRoom.name : ''}</span>
                 </div>
                 <div className="messageList" >{this.roomMessages()}</div>
+                <div className="content">
+                    <input
+                      type="text"
+                      placeholder="Type Message Here"
+                      value={this.state.content}
+                      onChange={(e) => this.handleNewMessage(e)} />
+                      <br />
+                      <button onClick={this.newMessage()}>Send</button>
+                </div>
              </div>
           );
     }

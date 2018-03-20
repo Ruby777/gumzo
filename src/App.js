@@ -74,15 +74,17 @@ class App extends Component {
         <div className="App-roomlist">
             <RoomList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
-            setActiveRoom = {(room) => this.setActiveRoom(room)} />
+            setActiveRoom = {(room) => this.setActiveRoom(room)} 
+            setUser = {(user) => this.setUser(user)} />
         </div>
         <div className="App-messagelist">
             <MessageList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
-            setActiveRoom = {(room) => this.setActiveRoom(room)} />
+            setActiveRoom = {(room) => this.setActiveRoom(room)} 
+            setUser = {(user) => this.setUser(user)} />
         </div>
         <div className="App-user">
-            <User firebase={firebase}
+            <User firebase = {firebase}
             activeRoom = {this.state.activeRoom}
             setActiveRoom = {(room) => this.setActiveRoom(room)} 
             setUser = {(user) => this.setUser(user)} />
