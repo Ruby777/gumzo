@@ -6,24 +6,22 @@ import MessageList from './components/MessageList.js';
 import User from './components/User.js';
 
 
-
 // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyA7G4uT-hqZ-hftan2bPXct3UU8mwBKns4",
-    authDomain: "react-chat-room-5d397.firebaseapp.com",
-    databaseURL: "https://react-chat-room-5d397.firebaseio.com",
-    projectId: "react-chat-room-5d397",
-    storageBucket: "react-chat-room-5d397.appspot.com",
-    messagingSenderId: "797104072210"
-  };
+var config = {
+  apiKey: "AIzaSyA7G4uT-hqZ-hftan2bPXct3UU8mwBKns4",
+  authDomain: "react-chat-room-5d397.firebaseapp.com",
+  databaseURL: "https://react-chat-room-5d397.firebaseio.com",
+  projectId: "react-chat-room-5d397",
+  storageBucket: "react-chat-room-5d397.appspot.com",
+  messagingSenderId: "797104072210"
+};
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-
+  
 class App extends Component {
   constructor(props){
     super(props)
-
 
     this.state = {
       activeRoom:null,
@@ -31,47 +29,51 @@ class App extends Component {
     };
   }
 
-    setActiveRoom(room) {
-      this.setState({ activeRoom: room });
-    }
+  setActiveRoom(room) {
+    this.setState({ activeRoom: room });
+  }
 
-    setUser(user){
-      this.setState({ currentUser: user });
-    }
+  setUser(user){
+    this.setState({ currentUser: user });
+  }
 
-    showSignInForm() {
-      //firebase authentication
-      var provider = new firebase.auth.GoogleAuthProvider();
-      provider.setCustomParameters({
-          prompt:'select_account'
-      });
+  showSignInForm() {
+    //firebase authentication
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    }); 
+
+    // firebase code goes here
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      console.log("you have signed in successfully");
       
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-        console.log("you have signed in successfully");
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-    }
-  signingOut(){ 
-      firebase.auth().signOut().then(function(){
-            // Sign-out successful.
-            console.log("you have signed out successfully");
-          }).catch(function(error){
-            //An error happened.
-          });
-      }
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      window.alert("Error :" + errorMessage);
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
+
+  signingOut(){
+    firebase.auth().signOut().then(function(){
+      // Sign-out successful.
+      console.log("you have signed out successfully");
+    }).catch(function(error){
+      //An error happened.
+   });
+}
 
   render() {
     return (
@@ -90,18 +92,18 @@ class App extends Component {
             <MessageList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
             setActiveRoom = {(room) => this.setActiveRoom(room)} 
-            setUser = {(user) => this.setUser(user)}
-            currentUser = {this.state.currentUser} />
+            setUser = {(user) => this.setUser(user)} 
+            currentUser = {this.state.currentUser}/>
         </div>
         <div className="App-user">
-            <User firebase={firebase}
+            <User firebase = {firebase}
             firebaseSignIn = {()=>this.showSignInForm()}
             firebaseSignOut = {()=>this.signingOut()}
             activeRoom = {this.state.activeRoom}
             setActiveRoom = {(room) => this.setActiveRoom(room)} 
-            setUser = {(user) => this.setUser(user)} 
+            setUser = {(user) => this.setUser(user)}
             currentUser = {this.state.currentUser} />
-        </div>
+          </div> 
       </section>
     );
   }
