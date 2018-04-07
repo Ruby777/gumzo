@@ -20,31 +20,6 @@ import User from './components/User.js';
   firebase.initializeApp(config);
 
 
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-      
-  firebase.auth().signOut().then(function(){
-       // Sign-out successful.
-      }).catch(function(error){
-       //An error happened.
-      });
-
-
 class App extends Component {
   constructor(props){
     super(props)
@@ -64,6 +39,39 @@ class App extends Component {
       this.setState({ currentUser: user });
     }
 
+    showSignInForm() {
+      //firebase authentication
+      var provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({
+          prompt:'select_account'
+      });
+      
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+        console.log("you have signed in successfully");
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+    }
+  signingOut(){ 
+      firebase.auth().signOut().then(function(){
+            // Sign-out successful.
+            console.log("you have signed out successfully");
+          }).catch(function(error){
+            //An error happened.
+          });
+      }
 
   render() {
     return (
@@ -74,18 +82,25 @@ class App extends Component {
         <div className="App-roomlist">
             <RoomList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
-            setActiveRoom = {(room) => this.setActiveRoom(room)} />
+            setActiveRoom = {(room) => this.setActiveRoom(room)} 
+            setUser = {(user) => this.setUser(user)}
+            currentUser = {this.state.currentUser} />
         </div>
         <div className="App-messagelist">
             <MessageList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
-            setActiveRoom = {(room) => this.setActiveRoom(room)} />
+            setActiveRoom = {(room) => this.setActiveRoom(room)} 
+            setUser = {(user) => this.setUser(user)}
+            currentUser = {this.state.currentUser} />
         </div>
         <div className="App-user">
             <User firebase={firebase}
+            firebaseSignIn = {()=>this.showSignInForm()}
+            firebaseSignOut = {()=>this.signingOut()}
             activeRoom = {this.state.activeRoom}
             setActiveRoom = {(room) => this.setActiveRoom(room)} 
-            setUser = {(user) => this.setUser(user)} />
+            setUser = {(user) => this.setUser(user)} 
+            currentUser = {this.state.currentUser} />
         </div>
       </section>
     );
