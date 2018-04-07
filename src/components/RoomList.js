@@ -16,12 +16,10 @@ class RoomList extends Component {
 
    componentDidMount() {
      this.roomsRef.on('child_added', snapshot => {
-       const room = snapshot.val();
-       console.log(room);
-       room.key = snapshot.key;
-       console.log(room.key);
-       this.setState({ rooms: this.state.rooms.concat( room ) });
-       });
+        const room = snapshot.val();
+        room.key = snapshot.key;
+        this.setState({ rooms: this.state.rooms.concat( room ) });
+        });
      }
 
      handleNewRoomName(e) {
@@ -30,9 +28,9 @@ class RoomList extends Component {
         }
 
      createRoom() {
-        this.roomsRef.push({name: this.state.roomName});
-        this.setState({roomName: ""});
-     }
+         this.roomsRef.push({name: this.state.roomName});
+         this.setState({roomName: ""});
+        }
      
 
   render(){
@@ -46,25 +44,28 @@ class RoomList extends Component {
 
     
 
-       return (
-          <div>
-             <ul>
-                {template}
-             </ul>
+      return (
+       this.props.currentUser ?
+         (
+          <div>  
+              <ul>
+                  {template}
+              </ul>
 
-             <p className="newRoom">Create A New Room</p>
+              <p className="newRoom">Create A New Room</p>
 
-             <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
-                <input
-                   type="text"
-                   placeholder="New Room Name"
-                   value={this.state.roomName}
-                   onChange={(e) => this.handleNewRoomName(e)} />
-                 <br />
-                 <button>Create Room</button>
-              </form>
-          </div>
-        );
+              <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
+                  <input
+                    type="text"
+                    placeholder="New Room Name"
+                    value={this.state.roomName}
+                    onChange={(e) => this.handleNewRoomName(e)} />
+                  <br />
+                  <button>Create Room</button>
+              </form> 
+           </div>
+         ) : null
+       );
     }
 };
 

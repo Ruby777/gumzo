@@ -25,64 +25,79 @@ class MessageList extends Component {
       });
     }
 
-roomMessages() {
-  
-  if (!this.props.activeRoom) {
-    return;
-  }
+    roomMessages() {
+        
+        if (!this.props.activeRoom) {
+          return;
+        }
 
-  let messages = this.state.messages;
-  let activeRoom = this.props.activeRoom;
-  let filteredMessages = messages.filter( message => {
-    return message.roomId === activeRoom.key;
-  });
+        let messages = this.state.messages;
+        let activeRoom = this.props.activeRoom;
+        let filteredMessages = messages.filter( message => {
+          return message.roomId === activeRoom.key;
+        });
 
-  let mappingFilteredMessages = filteredMessages.map((message, i) => {
-    return (
-      <div className="messageListMsg" key={i}>
-          <span className="userName">Username: {message.username}</span>
-          <br />
-          <span className="sentAt">Sent At: {message.sentAt}</span>
-          <br />
-          <span className="content">Content: {message.content}</span>
-      </div>
-    );
-  });
-
-  return mappingFilteredMessages; 
-}
-
-handleNewMessage(e) {
-  let newText = e.target.value;
-  this.setState({content: newText});
- }
-
-newMessage() {
-  this.messagesRef.push({content: this.state.content});
-  this.setState({content: ""});
-}
-
-    render(){
-          return(
-             <div className="messageContainer">
-                <div className="messagesHeader">
-                  <span className="roomName">Active Room: {this.props.activeRoom ? this.props.activeRoom.name : ''}</span>
-                </div>
-                <div className="messageList" >{this.roomMessages()}</div>
-                <div className="content">
-                    <input
-                      type="text"
-                      placeholder="Type Message Here"
-                      value={this.state.content}
-                      onChange={(e) => this.handleNewMessage(e)} />
-                      <br />
-                      <button onClick={this.newMessage()}>Send</button>
-                </div>
-             </div>
+        let mappingFilteredMessages = filteredMessages.map((message, i) => {
+          return (
+            <div className="messageListMsg" key={i}>
+                <span className="userName">Username: {message.username}</span>
+                <br />
+                <span className="sentAt">Sent At: {message.sentAt}</span>
+                <br />
+                <span className="content">Content: {message.content}</span>
+            </div>
           );
+        });
+
+        return mappingFilteredMessages; 
+      }
+
+    handleNewMessage(e) { 
+      let newMessage = e.target.value;
+      this.setState({content: newMessage});
+    }
+    
+    createNewMessage() {
+      if (!this.props.activeRoom) {
+        window.alert("Select a room first");
+        return;
+      }
+
+      let messageObject = {
+        content: this.state.content,
+        username: this.props.currentUser.displayName,
+        roomId: this.props.activeRoom.key,
+        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP 
+      };
+
+      this.messagesRef.push(messageObject);
+      this.setState({content: ""});
+        
+    }
+
+ render(){
+      return(
+        this.props.currentUser ?
+        (
+        <div className="messageContainer">
+            <div className="messagesHeader">
+              <span className="roomName">Active Room: {this.props.activeRoom ? this.props.activeRoom.name : ''}</span>
+            </div>
+            <div className="messageList" >{this.roomMessages()}</div>
+            <form className="content" onSubmit={(e) => {e.preventDefault(); this.createNewMessage()}}>
+                <input
+                  type="text"
+                  placeholder="Type Message Here"
+                  value={this.state.content}
+                  onChange={(e) => this.handleNewMessage(e)} />
+                  <br />
+                  <button>Send</button>
+            </form>
+         </div>
+        ) : null
+      );
     }
 };
-
 
 
 export default MessageList;
