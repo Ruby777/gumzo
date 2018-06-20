@@ -1,43 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Pacifico|Shrikhand');
+
 body {
-  background-color: skyblue;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-image: url("./styles/greg-raines-63369-unsplash.jpg");
+  background-size: 100%;
+  
 }
 
 .App {
-  width: 300px;
-  height: 900px;
+  width: 350px;
+  height: 600px;
   text-align: left;
-  background-color: lightgrey;
-}
+  background-color: rgb(248, 244, 244,0.4);
+  padding: 40px;
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: grey;
-  height: 10px;
-  padding: 10px;
-  color: white;
 }
 
 .App-title {
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
+  font-size: 50px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bolder;
+  color: fuchsia;
 }
 
 .App-roomlist {
   font-size: large;
-  color: blue;
+  color: navy;
+  font-family: Pacifico, cursive;
 }
 
-.newRoom {
- color: black;
- size: 10px;
-}
+/* input[type="text"]{
+  height: 20px;
+  width: 200px;
+} */
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.currentUser{
+  font-family: Pacifico, cursive;
+  color:navy;
 }

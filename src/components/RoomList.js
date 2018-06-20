@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './../styles/RoomList.css';
 
 
 class RoomList extends Component {
@@ -47,7 +47,7 @@ class RoomList extends Component {
       return (
        this.props.currentUser ?
          (
-          <div>  
+          <div className="roomList">  
               <ul>
                   {template}
               </ul>
@@ -56,11 +56,11 @@ class RoomList extends Component {
 
               <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
                   <input
+                    className="roomInput"
                     type="text"
                     placeholder="New Room Name"
                     value={this.state.roomName}
                     onChange={(e) => this.handleNewRoomName(e)} />
-                  <br />
                   <button>Create Room</button>
               </form> 
            </div>

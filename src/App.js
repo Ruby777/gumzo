@@ -6,6 +6,7 @@ import MessageList from './components/MessageList.js';
 import User from './components/User.js';
 
 
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA7G4uT-hqZ-hftan2bPXct3UU8mwBKns4",
@@ -75,13 +76,18 @@ class App extends Component {
    });
 }
 
+// timeConvert(){
+//   var timestamp = this.firebase.database.ServerValue.TIMESTAMP;
+//   var myDate = new Date(timestamp).getTime()
+// }
+
 
   render() {
     return (
       <section className="App">
         <header className="App-header">
         </header>
-        <p className="App-title">Bloc Chat</p>
+        <h2 className="App-title">Bloc Chat</h2>
         <div className="App-roomlist">
             <RoomList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
