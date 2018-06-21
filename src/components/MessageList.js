@@ -46,8 +46,10 @@ class MessageList extends Component {
         });
 
         let mappingFilteredMessages = filteredMessages.map((message, i) => {
+          console.log(message)
           return (
-            <div className="messageListMsg" key={i}>
+
+            <div id={`message-${message.key}`} className="messageListMsg" data-message-id={message.key} key={i}>
                 <span className="userName">Username: {message.username}</span>
                 <br />
                 <span className="sentAt">
