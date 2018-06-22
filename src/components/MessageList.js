@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import './../styles/MessageList.css';
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 
 
 class MessageList extends Component {
@@ -25,6 +29,7 @@ class MessageList extends Component {
       });
     }
 
+
     roomMessages() {
         
         if (!this.props.activeRoom) {
@@ -39,10 +44,13 @@ class MessageList extends Component {
 
         let mappingFilteredMessages = filteredMessages.map((message, i) => {
           return (
-            <div className="messageListMsg" key={i}>
+            <div id={`message-${message.key}`} className="messageListMsg" data-message-id={message.key} key={i}>
                 <span className="userName">Username: {message.username}</span>
                 <br />
-                <span className="sentAt">Sent At: {message.sentAt}</span>
+                <span className="sentAt">
+                  Sent At:
+                  <Moment format="DD-MM-YYYY HH:mm">{message.sentAt}</Moment>
+                </span>
                 <br />
                 <span className="content">Content: {message.content}</span>
             </div>
@@ -62,12 +70,13 @@ class MessageList extends Component {
         window.alert("Select a room first");
         return;
       }
-
+    
       let messageObject = {
+        
         content: this.state.content,
         username: this.props.currentUser.displayName,
         roomId: this.props.activeRoom.key,
-        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP 
+        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
       };
 
       this.messagesRef.push(messageObject);
@@ -86,11 +95,11 @@ class MessageList extends Component {
             <div className="messageList" >{this.roomMessages()}</div>
             <form className="content" onSubmit={(e) => {e.preventDefault(); this.createNewMessage()}}>
                 <input
+                  className="msgInput"
                   type="text"
                   placeholder="Type Message Here"
                   value={this.state.content}
                   onChange={(e) => this.handleNewMessage(e)} />
-                  <br />
                   <button>Send</button>
             </form>
          </div>

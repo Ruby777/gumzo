@@ -6,6 +6,7 @@ import MessageList from './components/MessageList.js';
 import User from './components/User.js';
 
 
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA7G4uT-hqZ-hftan2bPXct3UU8mwBKns4",
@@ -80,7 +81,7 @@ class App extends Component {
       <section className="App">
         <header className="App-header">
         </header>
-        <p className="App-title">Bloc Chat</p>
+        <h2 className="App-title">Bloc Chat</h2>
         <div className="App-roomlist">
             <RoomList firebase = {firebase}
             activeRoom = {this.state.activeRoom}

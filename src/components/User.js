@@ -18,11 +18,13 @@ class User extends Component {
         
         return(
           <div> 
-              <div>
+              <div className="signIn">
                 <button type="button" onClick={()=>this.props.firebaseSignIn()}>Sign In</button>
+              </div>
+              <div className="signOut"> 
                 <button type="button" onClick={()=>this.props.firebaseSignOut()}>Sign Out</button>
               </div>
-              <div>
+              <div className="currentUser">
               {this.props.currentUser ? this.props.currentUser.displayName : "Guest"}</div>
           </div>     
         );

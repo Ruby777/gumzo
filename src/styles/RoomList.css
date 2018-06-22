@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Pacifico|Shrikhand');
+
+button, input {
+    font-family: Pacifico, cursive;
+    color: navy;
+  }
+
+  input[type="text"]{
+    height: 20px;
+    width: 200px;
+  }
+  
