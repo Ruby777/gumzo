@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './../styles/MessageList.css';
 import Moment from 'react-moment';
 import 'moment-timezone';
-//import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+
 
 
 class MessageList extends Component {
@@ -29,9 +29,6 @@ class MessageList extends Component {
       });
     }
 
-    // formatDate(timestamp){
-    //   var day = moment.unix(timestamp);
-    // }
 
     roomMessages() {
         
@@ -46,9 +43,7 @@ class MessageList extends Component {
         });
 
         let mappingFilteredMessages = filteredMessages.map((message, i) => {
-          console.log(message)
           return (
-
             <div id={`message-${message.key}`} className="messageListMsg" data-message-id={message.key} key={i}>
                 <span className="userName">Username: {message.username}</span>
                 <br />
