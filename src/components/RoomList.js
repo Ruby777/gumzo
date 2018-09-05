@@ -49,7 +49,7 @@ class RoomList extends Component {
                   {template}
               </ul>
 
-              <p className="newRoom">Create A New Room</p>
+              <p className="newRoom">Create A New Chat Room</p>
 
               <form className="createRoom" onSubmit={(e) => {e.preventDefault(); this.createRoom()}}>
                   <input

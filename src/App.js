@@ -81,7 +81,7 @@ class App extends Component {
       <section className="App">
         <header className="App-header">
         </header>
-        <h2 className="App-title">Bloc Chat</h2>
+        <h2 className="App-title">Gumzo</h2>
         <div className="App-roomlist">
             <RoomList firebase = {firebase}
             activeRoom = {this.state.activeRoom}
