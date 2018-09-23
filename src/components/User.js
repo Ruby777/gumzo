@@ -16,17 +16,23 @@ class User extends Component {
 
     render() {
         
-        return(
-          <div> 
+        return (
+     
+          <div>   
               <div className="signIn">
-                <button type="button" onClick={()=>this.props.firebaseSignIn()}>Sign In</button>
-              </div>
+               {!this.props.currentUser ? 
+                <button type="button" onClick={()=>this.props.firebaseSignIn()}>Sign In</button>   
+                 : null}
+                </div>  
               <div className="signOut"> 
+               {this.props.currentUser ? 
                 <button type="button" onClick={()=>this.props.firebaseSignOut()}>Sign Out</button>
-              </div>
+                : null}
+              </div>   
+              <br />
               <div className="currentUser">
               {this.props.currentUser ? this.props.currentUser.displayName : "Guest"}</div>
-          </div>     
+          </div>  
         );
     }
 }

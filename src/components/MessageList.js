@@ -45,15 +45,15 @@ class MessageList extends Component {
         let mappingFilteredMessages = filteredMessages.map((message, i) => {
           return (
             <div id={`message-${message.key}`} className="messageListMsg" data-message-id={message.key} key={i}>
-                <span className="userName">Username: {message.username}</span>
-                <br />
+                <span className="userName"> {message.username}</span>
                 <span className="sentAt">
-                  Sent At:
                   <Moment format="DD-MM-YYYY HH:mm">{message.sentAt}</Moment>
                 </span>
                 <br />
-                <span className="content">Content: {message.content}</span>
-            </div>
+                <span className="content">{message.content}</span>
+                <br />
+                <hr />
+            </div>  
           );
         });
 
@@ -90,7 +90,9 @@ class MessageList extends Component {
         (
         <div className="messageContainer">
             <div className="messagesHeader">
+            <br />
               <span className="roomName">Active Room: {this.props.activeRoom ? this.props.activeRoom.name : ''}</span>
+            <br />
             </div>
             <div className="messageList" >{this.roomMessages()}</div>
             <form className="content" onSubmit={(e) => {e.preventDefault(); this.createNewMessage()}}>
@@ -100,10 +102,10 @@ class MessageList extends Component {
                   placeholder="Type Message Here"
                   value={this.state.content}
                   onChange={(e) => this.handleNewMessage(e)} />
-                  <button>Send</button>
+                  <button class="send">Send</button>
             </form>
          </div>
-        ) : null
+        ) : <h3 class="welcome">Hi, Welcome to Gumzo (pronounced "Gooh-m-zo")! Please log in to continue.</h3>
       );
     }
 };
